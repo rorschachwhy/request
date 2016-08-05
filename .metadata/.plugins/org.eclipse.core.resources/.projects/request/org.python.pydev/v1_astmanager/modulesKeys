@@ -1,1 +1,12 @@
 MODULES_MANAGER_V2
+confighttp|D:\DEV\request\request\src\confighttp.py
+configrunmode|D:\DEV\request\request\src\configrunmode.py
+datastruct|D:\DEV\request\request\src\datastruct.py
+getdb|D:\DEV\request\request\src\getdb.py
+globalconfig|D:\DEV\request\request\src\globalconfig.py
+hello|D:\DEV\request\request\src\hello.py
+htmlreport|D:\DEV\request\request\src\htmlreport.py
+main|D:\DEV\request\request\src\main.py
+pyh|D:\DEV\request\request\src\pyh.py
+runcase|D:\DEV\request\request\src\runcase.py
+test_interface_case|D:\DEV\request\request\src\test_interface_case.py

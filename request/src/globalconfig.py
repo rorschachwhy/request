@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-__author__ = 'shouke'
-
 from getdb import GetDB
 from confighttp import ConfigHttp
 from configrunmode import ConfigRunMode
 
+
 class Global:
+
     def __init__(self):
         # 读取并配置接口服务器IP，端口等信息
         self.http = ConfigHttp('../http_conf.ini')

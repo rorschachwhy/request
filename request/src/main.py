@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-__author__ = 'shouke'
-
 import datetime
 import unittest
 
@@ -16,7 +14,7 @@ if __name__ == '__main__':
 
     # 全局配置
     global_config = Global()
-    run_mode = global_config.get_run_mode() # 运行模式
+    run_mode = global_config.get_run_mode()  # 运行模式
     run_case_list = global_config.get_run_case_list()  # 需要运行的用例列表
     db1_conn = global_config.get_db1_conn()   # 数据库连接
     db2_conn = global_config.get_db2_conn()   # 数据库连接
@@ -25,7 +23,8 @@ if __name__ == '__main__':
     # 运行测试用例
     runner = unittest.TextTestRunner()
     case_runner = RunCase()
-    case_runner.run_case(runner, run_mode, run_case_list, db1_conn, db2_conn, http)
+    case_runner.run_case(runner, run_mode, run_case_list,
+                         db1_conn, db2_conn, http)
 
     # 记录测试结束时间
     end_time = datetime.datetime.now()

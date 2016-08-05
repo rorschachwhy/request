@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//src/confighttp.py=utf-8
+encoding//src/configrunmode.py=utf-8
+encoding//src/datastruct.py=utf-8
+encoding//src/getdb.py=utf-8
+encoding//src/globalconfig.py=utf-8
+encoding//src/htmlreport.py=utf-8
+encoding//src/main.py=utf-8
+encoding//src/pyh.py=utf-8
+encoding//src/runcase.py=utf-8
+encoding//src/test_interface_case.py=utf-8

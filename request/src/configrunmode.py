@@ -1,11 +1,11 @@
 ﻿#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-__author__ = 'shouke'
-
 import configparser
 
+
 class ConfigRunMode:
+
     def __init__(self, run_case_config_file):
         config = configparser.ConfigParser()
 
@@ -24,4 +24,4 @@ class ConfigRunMode:
         return self.run_mode
 
     def get_case_list(self):
-        return  self.case_list
+        return self.case_list
