@@ -24,7 +24,8 @@ class TestInterfaceCase(ParametrizedTestCase):
         pass
 
     def test_POST(self):
-        header = {'Content-Type': 'application/x-www-form-urlencoded', 'charset': 'utf-8'}
+        header = {'Content-Type': 'application/x-www-form-urlencoded',
+                  'charset': 'utf-8'}
         self.http.set_header(header)
         # 步骤1-登录
         self.db1_cursor.execute(

@@ -34,4 +34,44 @@ CREATE TABLE test_result (
 )
 ;
 
-INSERT INTO `testdb`.`test_data` (`case_id`, `http_method`, `request_name`, `request_url`, `request_param`, `test_method`, `test_desc`) VALUES ('1', 'POST', 'eleCreateOrder', '/eleme/v1/order/create', 'order_number=4-1000-1274767&delivery_number=31000219887697&order_price=10.00&store_consignee_fee=0.00&planned_pickup_time=1457489751&planned_complete_time=1457489751&order_note=订单备注&store_id=20160304&store_name=蒙娜丽莎的微笑&store_address=北京望京SOHO-T3-B-1907&store_longitude=116.475166&store_latitude=40.001566&store_phone=13836130596&store_sequence_number=01&deliver_type=1&consignee_name=王超&consignee_phone=13836130596&consignee_address=北京望京SOHO-T3-B-1907&consignee_longitude=116.475166&consignee_latitude=40.001566&consignee_note=用户备注&city_code=110000&is_predicted=0&invoice_title=饿了么发票&order_products=[{\"name\":\"榴莲\",\"quantity\":\"5\",\"total_price\":\"5000\",\"total_weight\":\"2500\",\"unit\":\"份\",\"unit_price\":\"1000\",\"unit_weight\":\"500\"}]&app_key=ele123456789qwe&sign=7594310cd3ff15d4a8610ceeab7f4089', 'POST', '饿了么创建订单');
+DROP SCHEMA  IF EXISTS testdb;
+CREATE SCHEMA testdb DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+use testdb;
+CREATE TABLE `t_case_group` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `code` varchar(45) NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_case_group_code` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `t_case_date` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `code` varchar(45) NOT NULL,
+  `http_method` varchar(10) DEFAULT NULL COMMENT 'http 方法（POST、GET等）',
+  `request_url` varchar(200) DEFAULT NULL,
+  `request_param` varchar(1000) DEFAULT NULL,
+  `description` varchar(2000) DEFAULT NULL,
+  `case_group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_case_group` FOREIGN KEY (`case_group_id`) REFERENCES `t_case_group` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `testdb`.`t_case_result` (
+    `id` INT(10) NOT NULL AUTO_INCREMENT,
+    `code` VARCHAR(45) NOT NULL,
+    `date` DATETIME NULL,
+    `result` VARCHAR(100) NULL,
+    `case_id` INT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+    CONSTRAINT `fk_case_date` FOREIGN KEY (`case_id`)
+        REFERENCES `testdb`.`t_case_date` (`id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
+
+INSERT INTO `testdb`.`t_case_group` (`id`, `code`, `description`) VALUES ('1', 'eleOrder', '饿了么订单');
+INSERT INTO `testdb`.`t_case_group` (`id`, `code`, `description`) VALUES ('2', 'partnerOrder', '大B订单');
+INSERT INTO `testdb`.`t_case_group` (`id`, `code`, `description`) VALUES ('3', 'psbOrder', '配送宝订单');
+
+INSERT INTO `testdb`.`t_case_date` (`id`, `code`, `http_method`, `request_url`, `request_param`, `description`, `case_group_id`) VALUES ('1', 'eleCreateOrder', 'POST', '/eleme/v1/order/create', 'order_number=4-1000-1274323767&delivery_number=3132739827697&order_price=10.00&store_consignee_fee=0.00&planned_pickup_time=1457489751&planned_complete_time=1457489751&order_note=订单备注&store_id=20160304&store_name=蒙娜丽莎的微笑&store_address=北京望京SOHO-T3-B-1907&store_longitude=116.475166&store_latitude=40.001566&store_phone=13836130596&store_sequence_number=01&deliver_type=1&consignee_name=王超&consignee_phone=13836130596&consignee_address=北京望京SOHO-T3-B-1907&consignee_longitude=116.475166&consignee_latitude=40.001566&consignee_note=用户备注&city_code=110000&is_predicted=0&invoice_title=饿了么发票&order_products=[{\"name\":\"榴莲\",\"quantity\":\"5\",\"total_price\":\"5000\",\"total_weight\":\"2500\",\"unit\":\"份\",\"unit_price\":\"1000\",\"unit_weight\":\"500\"}]&app_key=ele123456789qwe&sign=7594310cd3ff15d4a8610ceeab7f4089', '饿了么创建订单', '1');
